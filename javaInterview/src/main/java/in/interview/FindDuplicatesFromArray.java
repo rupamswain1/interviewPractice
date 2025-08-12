@@ -1,6 +1,8 @@
 package in.interview;
 
 import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class FindDuplicatesFromArray {
     public static void main(String[] args){
@@ -29,5 +31,15 @@ public class FindDuplicatesFromArray {
                 System.out.println("duplicate: "+entry.getKey());
             }
         }
+        // using streams
+        Map<String, Long> grouped = Arrays.asList(sample).stream().collect(Collectors.groupingBy(x->x, Collectors.counting()));
+        System.out.println(grouped);
+        for(Map.Entry<String, Long> m: grouped.entrySet()){
+            if(m.getValue()>1){
+                System.out.println("duplicate: "+m.getKey());
+            }
+
+        }
     }
 }
+
